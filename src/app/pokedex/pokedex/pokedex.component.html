@@ -1,0 +1,7 @@
+<div class="pokedex-container">
+  <app-pokedex-filter></app-pokedex-filter>
+  <app-pokemon-card *ngFor="let pokemon of pokedex$ | async"
+    [pokemon]="pokemon"
+    (pokemonSelected)="onPokemonSelected($event)">
+  </app-pokemon-card>
+</div>

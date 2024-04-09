@@ -1,0 +1,47 @@
+.pokemon {
+  width: 250px;
+
+  .type {
+    font-weight: 500;
+  }
+
+  .weakness {
+    font-weight: 500;
+  }
+
+  &.selected {
+    box-shadow: 0px 0px 8px 1px green;
+  }
+  &.unselected {
+    box-shadow: 0px 0px 8px 1px red;
+  }
+}
+
+
+@media(max-width: 767px) {
+  .pokemon {
+    width: 45vw;
+
+    .pokemon-name {
+      font-size: 16px !important;
+    }
+
+    .type {
+      font-size: 12px;
+
+      img {
+        height: 15px !important;
+        width: 15px !important;
+      }
+    }
+
+    .weakness {
+      font-size: 12px;
+
+      img {
+        height: 15px !important;
+        width: 15px !important;
+      }
+    }
+  }
+}

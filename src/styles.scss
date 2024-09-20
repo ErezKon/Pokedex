@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$separator: #c1c1c1;
+
+.shadow {
+    box-shadow: 0px 0px 6px 2px $separator !important;
+
+    &:hover {
+        box-shadow: 0px 0px 12px 4px #6666f1 !important
+    }
+}
+
+.full-width {
+    width: 100%;
+}

@@ -5,7 +5,7 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 import { AppState } from 'src/app/state-management/states/app.state';
 
 import * as pokedexActions from '../../state-management/actions/pokedex.actions';
-import { getPokedex, selectPokedexState } from 'src/app/state-management/selectors/pokedex.selectors';
+import { fetchingPokedex, getPokedex, selectPokedexState } from 'src/app/state-management/selectors/pokedex.selectors';
 
 @Component({
   selector: 'app-pokedex',
@@ -14,10 +14,16 @@ import { getPokedex, selectPokedexState } from 'src/app/state-management/selecto
 })
 export class PokedexComponent {
   pokedex$: Observable<Pokemon[]>;
-  
+  loading$: Observable<boolean>;
+  filter: string | null = null;
   constructor(private store: Store<AppState>) {
     store.dispatch(pokedexActions.getPokedex());
     this.pokedex$ = store.pipe(select(getPokedex));
+    this.loading$ = store.pipe(select(fetchingPokedex));
+  }
+
+  onFilter(filter: string | null) {
+    this.filter = filter;
   }
 
   onPokemonSelected(pokemon: Pokemon) {}

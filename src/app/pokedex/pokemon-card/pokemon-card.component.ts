@@ -45,7 +45,9 @@ export class PokemonCardComponent implements OnInit {
   ngOnInit(): void {
     this.style = {
       'background-image': `url('${this.pokemon.image}')`,
-      'background-size': '45px'
+      'background-size': '60px',
+      'width': '60px',
+      'height': '60px'
     };
   }
 

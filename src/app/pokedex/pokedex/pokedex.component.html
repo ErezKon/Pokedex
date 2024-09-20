@@ -1,7 +1,13 @@
 <div class="pokedex-container">
-  <app-pokedex-filter></app-pokedex-filter>
-  <app-pokemon-card *ngFor="let pokemon of pokedex$ | async"
-    [pokemon]="pokemon"
-    (pokemonSelected)="onPokemonSelected($event)">
-  </app-pokemon-card>
+  <app-pokedex-filter (filter)="onFilter($event)"></app-pokedex-filter>
+  <div class="cards-container" *ngIf="!(loading$ | async)">
+    <app-pokemon-card *ngFor="let pokemon of pokedex$ | async | filterPokemon: filter"
+      [pokemon]="pokemon"
+      (pokemonSelected)="onPokemonSelected($event)">
+    </app-pokemon-card>
+  </div>
+  
+  <div class="spinner" *ngIf="loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>

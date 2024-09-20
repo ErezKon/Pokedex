@@ -13,6 +13,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { PokedexEffects } from './state-management/effects/pokedex.effects';
 import { appReducers, metaReducers } from './state-management/reducers';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterPokemonPipe } from './utils/pipes/pokemon-filter.pipe';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { appReducers, metaReducers } from './state-management/reducers';
     AppComponent,
     PokedexComponent,
     PokemonCardComponent,
-    PokedexFilterComponent
+    PokedexFilterComponent,
+    FilterPokemonPipe
   ],
   imports: [
     BrowserModule,
@@ -33,8 +36,9 @@ import { appReducers, metaReducers } from './state-management/reducers';
     EffectsModule.forRoot([
       PokedexEffects
     ]),
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [FilterPokemonPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

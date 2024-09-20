@@ -1,0 +1,8 @@
+version: "3"
+services:
+ pokedex:
+    container_name: pokedex
+    build: .
+    restart: always
+    ports:
+      - "5333:80"

@@ -140,7 +140,7 @@
         <div class="row align-middle">
             <div class="evolution-chain">
                 <div *ngFor="let mon of evolutionChain; let $index = index;" class="mon" [ngClass]="{'current': mon.id === pokemon.id}">
-                    <div class="image">
+                    <div class="image" [matTooltip]="mon?.name ?? ''">
                         <img [src]="mon.image" />
                     </div>
                     <div class="next" *ngIf="$index < (evolutionChain?.length ?? 0) - 1">

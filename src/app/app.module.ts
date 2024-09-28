@@ -9,10 +9,6 @@ import { PokemonCardComponent } from './pokedex/pokemon-card/pokemon-card.compon
 import { PokedexFilterComponent } from './pokedex/pokedex-filter/pokedex-filter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { PokedexEffects } from './state-management/effects/pokedex.effects';
-import { appReducers, metaReducers } from './state-management/reducers';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPokemonPipe } from './utils/pipes/pokemon-filter.pipe';
 import { SinglePokemonComponent } from './pokedex/single-pokemon/single-pokemon.component';
@@ -34,10 +30,6 @@ import { SinglePokemonComponent } from './pokedex/single-pokemon/single-pokemon.
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot(appReducers, { metaReducers }),
-    EffectsModule.forRoot([
-      PokedexEffects
-    ]),
     BrowserAnimationsModule,
   ],
   providers: [FilterPokemonPipe],

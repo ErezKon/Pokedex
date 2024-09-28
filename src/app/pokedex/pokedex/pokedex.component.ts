@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { State, Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Pokemon } from 'src/app/models/pokemon.model';
-import { AppState } from 'src/app/state-management/states/app.state';
-
-import * as pokedexActions from '../../state-management/actions/pokedex.actions';
-import { fetchingPokedex, getPokedex, selectPokedexState } from 'src/app/state-management/selectors/pokedex.selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { SinglePokemonComponent } from '../single-pokemon/single-pokemon.component';
+import { PokedexService } from 'src/app/services/pokedex.service';
 
 @Component({
   selector: 'app-pokedex',
@@ -18,10 +14,9 @@ export class PokedexComponent {
   pokedex$: Observable<Pokemon[]>;
   loading$: Observable<boolean>;
   filter: string | null = null;
-  constructor(private store: Store<AppState>, public dialog: MatDialog) {
-    store.dispatch(pokedexActions.getPokedex());
-    this.pokedex$ = store.pipe(select(getPokedex));
-    this.loading$ = store.pipe(select(fetchingPokedex));
+  constructor(public dialog: MatDialog, private pokedexService: PokedexService) {
+    this.pokedex$ = pokedexService.getPokedex();
+    this.loading$ = pokedexService.getLoadingPokedex$();
   }
 
   onFilter(filter: string | null) {
@@ -29,7 +24,7 @@ export class PokedexComponent {
   }
 
   onPokemonSelected(pokemon: Pokemon) {
-    this.store.dispatch(pokedexActions.getPokemon({ pokemonId: pokemon.id }));
+    this.pokedexService.getPokemon(pokemon.id);
     const dialogRef = this.dialog.open(SinglePokemonComponent, {
       data: pokemon,
       width: '70vw',

@@ -1,11 +1,9 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { PokemonDescription } from 'src/app/models/pokemon-description.model';
 import { Pokemon } from 'src/app/models/pokemon.model';
-import { fetchingSinglePokemon, getSinglePokemon } from 'src/app/state-management/selectors/pokedex.selectors';
-import { AppState } from 'src/app/state-management/states/app.state';
+import { PokedexService } from 'src/app/services/pokedex.service';
 import { getTypeIcon } from 'src/app/utils/type-converter';
 
 @Component({
@@ -23,10 +21,10 @@ export class SinglePokemonComponent implements OnDestroy {
   evolutionChain?: Array<{id: number, name: string, image: string}> = [];
   
   constructor(public dialogRef: MatDialogRef<SinglePokemonComponent>,
-              private store: Store<AppState>,
+              private pokedexService: PokedexService,
               @Inject(MAT_DIALOG_DATA) public pokemon: Pokemon) {
-    this.pokemon$ = store.pipe(select(getSinglePokemon));
-    this.loading$ = store.pipe(select(fetchingSinglePokemon));
+    this.pokemon$ = pokedexService.getPokemon$();
+    this.loading$ = pokedexService.getLoadingPokemon$();
     this.pokemonSubscription = this.pokemon$.subscribe(pokemon => {
       this.pokemon = pokemon;
       if(pokemon?.id) {

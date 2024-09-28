@@ -5,11 +5,13 @@ export interface PokedexState {
   pokemon: Pokemon;
   selected: Array<Pokemon>;
   fetchingPokedex: boolean;
+  fetchingPokemon: boolean;
 }
 
 export const initialPokedexState: PokedexState = {
   pokedex: [],
   pokemon: {} as Pokemon,
   selected: [],
-  fetchingPokedex: false
+  fetchingPokedex: false,
+  fetchingPokemon: false
 };

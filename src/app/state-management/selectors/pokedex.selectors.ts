@@ -23,3 +23,8 @@ export const fetchingPokedex = createSelector(
   selectPokedexState,
   (state: PokedexState) => state.fetchingPokedex
 );
+
+export const fetchingSinglePokemon = createSelector(
+  selectPokedexState,
+  (state: PokedexState) => state.fetchingPokemon
+);

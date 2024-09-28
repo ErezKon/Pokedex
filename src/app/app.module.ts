@@ -15,6 +15,7 @@ import { PokedexEffects } from './state-management/effects/pokedex.effects';
 import { appReducers, metaReducers } from './state-management/reducers';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPokemonPipe } from './utils/pipes/pokemon-filter.pipe';
+import { SinglePokemonComponent } from './pokedex/single-pokemon/single-pokemon.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FilterPokemonPipe } from './utils/pipes/pokemon-filter.pipe';
     PokedexComponent,
     PokemonCardComponent,
     PokedexFilterComponent,
-    FilterPokemonPipe
+    FilterPokemonPipe,
+    SinglePokemonComponent
   ],
   imports: [
     BrowserModule,

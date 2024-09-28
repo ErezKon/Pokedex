@@ -1,0 +1,158 @@
+<h2 mat-dialog-title class="dialog-title">{{pokemon.name}}</h2>
+<mat-dialog-content>
+    <div class="loading" *ngIf="(loading$ | async)">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="single-pokemon-container" *ngIf="!(loading$ | async)">
+        <div class="base-details">
+            <div class="image">
+                <img [src]="(pokemon$ | async)?.image" class="pokemon-image" />
+            </div>
+            <div class="double-row">
+                <div class="row">
+                    <div class="pokemon-num">
+                        <div class="title">
+                            No.
+                        </div>
+                        <div class="value">
+                            {{pokemon.id}}
+                        </div>
+                    </div>
+                    <div class="pokemon-name">
+                        <div class="title">
+                            Name
+                        </div>
+                        <div class="value">
+                            {{pokemon.name}}
+                        </div>
+                    </div>
+                    <div class="pokemon-type">
+                        <div class="type">
+                            Type:
+                            <img *ngFor="let type of pokemon.type" [src]="getPokemonTypeIcon(type)" height="20px" width="20px" [matTooltip]="type">
+                        </div>
+                        
+                        <div class="weakness">
+                            Weakness:
+                            <img *ngFor="let type of pokemon.weakness" [src]="getPokemonTypeIcon(type)" height="20px" width="20px" [matTooltip]="type">
+                        </div>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="descriptions">
+                        <div class="pokedex-entries">
+                            Pokedex Entries
+                        </div>
+                        <div class="prev">
+                            <mat-icon fontIcon="arrow_back_ios" (click)="prev()" matTooltip="Previous Description"></mat-icon>
+                        </div>
+                        <div class="description-container">
+                            <div class="description">
+                                {{pokemonDescription?.description}}
+                            </div>
+                            <div class="version">
+                                <span class="ver">Game Version: </span> {{pokemonDescription?.version}}
+                            </div>
+                        </div>
+                        <div class="next">
+                            <mat-icon fontIcon="arrow_forward_ios" (click)="next()" matTooltip="Next Description"></mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stats-title">
+            Pokemon Stats
+        </div>
+        <div class="row">
+            <div class="stats">
+                <div class="title">
+                </div>
+                <div class="value">
+                    <div class="hp">HP: {{pokemon.details?.stats?.hp}} </div>
+                    <div class="attack">Attack: {{pokemon.details?.stats?.attack}} </div>
+                    <div class="defense">Defense: {{pokemon.details?.stats?.defence}} </div>
+                    <div class="special-attack">Special Attack: {{pokemon.details?.stats?.specialAttack}} </div>
+                    <div class="special-defense">Special Defense: {{pokemon.details?.stats?.specialDefence}} </div>
+                </div>
+            </div>
+            <div class="boolean-stats">
+                <div class="is-baby">
+                    <div class="title">
+                        Is Baby:
+                    </div>
+                    <div class="value" [matTooltip]="pokemon.details?.isBaby ? 'Baby' : 'Not a baby'">
+                        {{pokemon.details?.isBaby ? '✅' : '❌'}}
+                    </div>
+                </div>
+                <div class="is-legendary">
+                    <div class="title">
+                        Is Legendary:
+                    </div>
+                    <div class="value" [matTooltip]="pokemon.details?.isLegendary ? 'Legendary' : 'Not legendary'">
+                        {{pokemon.details?.isLegendary ? '✅' : '❌'}}
+                    </div>
+                </div>
+                <div class="is-mythical">
+                    <div class="title">
+                        Is Mythical:
+                    </div>
+                    <div class="value" [matTooltip]="pokemon.details?.isMythical ? 'Mythical' : 'Not mythical'">
+                        {{pokemon.details?.isMythical ? '✅' : '❌'}}
+                    </div>
+                </div>
+                <div class="has-gender-difference">
+                    <div class="title">
+                        Has Gender Difference:
+                    </div>
+                    <div class="value" [matTooltip]="pokemon.details?.hasGenderDifference ? 'Have gender difference' : 'Does not have gender difference'">
+                        {{pokemon.details?.hasGenderDifference ? '✅' : '❌'}}
+                    </div>
+                </div>
+            </div>
+            <div class="advanced-stats">
+                <div class="generation">
+                    <div class="title">
+                        Generation: 
+                    </div>
+                    <div class="value">
+                        {{pokemon.details?.generation}}
+                    </div>
+                </div>
+                <div class="catch-rate">
+                    <div class="title">
+                        Catch Rate: 
+                    </div>
+                    <div class="value">
+                        {{pokemon.details?.catchRate}}
+                    </div>
+                </div>
+                <div class="gender-rarity">
+                    <div class="title">
+                        Gender Rarity: 
+                    </div>
+                    <div class="value">
+                        {{pokemon.details?.maleRarity}}% Male, {{100 - ((pokemon.details?.maleRarity) ?? 0)}}% Female
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-middle">
+            <div class="evolution-chain">
+                <div *ngFor="let mon of evolutionChain; let $index = index;" class="mon" [ngClass]="{'current': mon.id === pokemon.id}">
+                    <div class="image">
+                        <img [src]="mon.image" />
+                    </div>
+                    <div class="next" *ngIf="$index < (evolutionChain?.length ?? 0) - 1">
+                        <div class="prev">
+                            <mat-icon fontIcon="arrow_forward"></mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="onCloseClick()" class="close">Close</button>
+</mat-dialog-actions>

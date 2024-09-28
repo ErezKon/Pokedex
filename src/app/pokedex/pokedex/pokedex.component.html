@@ -3,6 +3,7 @@
   <div class="cards-container" *ngIf="!(loading$ | async)">
     <app-pokemon-card *ngFor="let pokemon of pokedex$ | async | filterPokemon: filter"
       [pokemon]="pokemon"
+      [selectable]="true"
       (pokemonSelected)="onPokemonSelected($event)">
     </app-pokemon-card>
   </div>

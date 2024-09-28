@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon.model';
 import { ActionButton } from 'src/app/utils/action-button';
 import { getTypeIcon } from 'src/app/utils/type-converter';
@@ -16,22 +16,16 @@ export enum SelectionStatus {
 })
 export class PokemonCardComponent implements OnInit {
 
-  @Input()
   public pokemon!: Pokemon;
 
-  @Input()
   public actions!: Array<ActionButton>;
 
-  @Input()
   public selectable = false;
 
-  @Input()
   public selected = SelectionStatus.None
 
-  @Output()
   public pokemonSelected = new EventEmitter<Pokemon>();
 
-  @Output()
   public pokemonUnselected = new EventEmitter<Pokemon>();
 
   image!: string;

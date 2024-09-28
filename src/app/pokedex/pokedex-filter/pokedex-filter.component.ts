@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +9,9 @@ import { Subscription } from 'rxjs';
 })
 export class PokedexFilterComponent implements OnDestroy {
   filterFormControl = new FormControl('');
-  @Output() filter = new EventEmitter<string | null>();
+
+  filter = new EventEmitter<string | null>();
+
   private sub!: Subscription;
 
   constructor() {

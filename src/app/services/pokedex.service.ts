@@ -40,6 +40,7 @@ export class PokedexService implements OnDestroy {
       return of({} as Pokemon);
     }
     this.loadingPokemon$.next(true);
+    this.pokemon$.next({} as Pokemon);
     this.subscriptions.push(this.http.get<Pokemon>(`${this.serverURL}/Get/${id}`)
       .pipe(catchError(err => {
         this.loadingPokemon$.next(false);

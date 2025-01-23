@@ -33,7 +33,7 @@ export class PokedexComponent {
     const dialogRef = this.dialog.open(SinglePokemonComponent, {
       data: pokemon,
       width: '70vw',
-      height: '80vh'
+      height: '90vh'
     });
 
     dialogRef.afterClosed().subscribe(result => {
